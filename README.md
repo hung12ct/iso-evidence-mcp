@@ -46,6 +46,8 @@ That's it.
 2. Copy the secret (`ntn_…`) into `NOTION_TOKEN`.
 3. Open your Notion page → **•••** → **Connections** → add the integration. *(Skip this and you'll get a 404.)*
 
+> **Only a guest in the workspace?** Creating/installing an integration is a workspace **member/admin** action — guests usually can't do steps 1–3. Either ask a workspace admin to create the integration and share the pages (then use the token above), or read/write the pages through a connector that logs in **as you** (e.g. Claude Code's built-in `claude.ai Notion` connector via `/mcp`), which uses your own page permissions.
+
 ### Tools (what Claude uses under the hood)
 
 | Tool | Does |
