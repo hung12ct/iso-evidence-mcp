@@ -1,0 +1,29 @@
+[project]
+name = "iso-evidence-mcp"
+version = "0.1.0"
+description = "MCP server: read a task from Notion, capture authenticated GitHub screenshots, upload them back as evidence."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Hung Nguyen" }]
+keywords = ["mcp", "notion", "playwright", "screenshot", "iso27001", "audit"]
+dependencies = [
+    "fastmcp>=2.0.0",
+    "playwright>=1.45.0",
+    "httpx>=0.27.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+iso-evidence = "iso_evidence_mcp.cli:cli"
+iso-evidence-mcp = "iso_evidence_mcp.server:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0", "ruff>=0.5.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/iso_evidence_mcp"]

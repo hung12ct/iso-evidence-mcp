@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Secrets & local session
+.env
+session.json
+*.session.json
+
+# Captures
+*.png
+!docs/**/*.png
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
