@@ -1,0 +1,18 @@
+{
+  "name": "iso-evidence-official",
+  "owner": {
+    "name": "Hung Nguyen",
+    "url": "https://github.com/hung12ct"
+  },
+  "description": "Audit-evidence automation plugins for Claude Code.",
+  "plugins": [
+    {
+      "name": "iso-evidence",
+      "source": "./plugins/iso-evidence",
+      "description": "Read a task from Notion, capture authenticated GitHub screenshots with Playwright, and upload them back to the page as evidence. Built for ISO 27001.",
+      "version": "0.1.0",
+      "author": { "name": "Hung Nguyen" },
+      "keywords": ["mcp", "notion", "playwright", "screenshot", "iso27001", "audit", "compliance"]
+    }
+  ]
+}

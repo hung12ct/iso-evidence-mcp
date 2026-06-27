@@ -20,7 +20,26 @@ The agent (Claude Code, etc.) does the actual GitHub implementation; this server
 
 GitHub Actions runs and PR checks are private pages — a headless browser needs to be logged in. You log in **once** in a real browser; the session (cookies) is saved to disk and reused headlessly for every later capture. No tokens in screenshots, no re-login.
 
-## Setup
+## Install as a Claude Code plugin (easiest)
+
+```
+/plugin marketplace add hung12ct/iso-evidence-mcp
+/plugin install iso-evidence@iso-evidence-official
+```
+
+Then run `/mcp` to confirm the **iso-evidence** server is connected.
+
+The plugin runs the server via `uvx` from this repo, so you need **[uv](https://docs.astral.sh/uv/)** installed, `NOTION_TOKEN` exported in your shell, and a one-time GitHub login:
+
+```bash
+export NOTION_TOKEN=ntn_xxx
+uvx --from git+https://github.com/hung12ct/iso-evidence-mcp.git iso-evidence login
+```
+
+Chromium is installed automatically on first capture. See
+[`plugins/iso-evidence/README.md`](plugins/iso-evidence/README.md) for details.
+
+## Setup (manual / development)
 
 ```bash
 # 1. Install (editable for easy customizing)

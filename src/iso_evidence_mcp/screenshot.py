@@ -9,9 +9,26 @@ from __future__ import annotations
 
 import asyncio
 import os
+import subprocess
+import sys
 from pathlib import Path
 
-from playwright.async_api import async_playwright
+from playwright.async_api import Browser, Playwright, async_playwright
+
+
+async def _launch_chromium(p: Playwright, *, headless: bool) -> Browser:
+    """Launch Chromium, installing it on first use if the binary is missing."""
+    try:
+        return await p.chromium.launch(headless=headless)
+    except Exception as exc:  # noqa: BLE001 - inspect message, then retry once
+        message = str(exc)
+        if "Executable doesn't exist" in message or "playwright install" in message:
+            subprocess.run(
+                [sys.executable, "-m", "playwright", "install", "chromium"],
+                check=True,
+            )
+            return await p.chromium.launch(headless=headless)
+        raise
 
 DEFAULT_SESSION = Path(
     os.environ.get(
@@ -30,7 +47,7 @@ async def save_login(
     session_path.parent.mkdir(parents=True, exist_ok=True)
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await _launch_chromium(p, headless=False)
         context = await browser.new_context()
         page = await context.new_page()
         await page.goto(login_url)
@@ -67,7 +84,7 @@ async def capture(
     storage = str(session_path) if Path(session_path).exists() else None
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await _launch_chromium(p, headless=True)
         context = await browser.new_context(
             storage_state=storage,
             viewport={"width": width, "height": height},

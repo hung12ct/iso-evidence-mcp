@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "iso-evidence",
+  "displayName": "ISO Evidence",
+  "version": "0.1.0",
+  "description": "Read a task from Notion, capture authenticated GitHub screenshots with Playwright, and upload them back to the page as evidence.",
+  "author": { "name": "Hung Nguyen", "url": "https://github.com/hung12ct" },
+  "homepage": "https://github.com/hung12ct/iso-evidence-mcp",
+  "keywords": ["mcp", "notion", "playwright", "screenshot", "iso27001", "audit", "compliance"],
+  "mcpServers": {
+    "iso-evidence": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/hung12ct/iso-evidence-mcp.git",
+        "iso-evidence-mcp"
+      ],
+      "env": {
+        "NOTION_TOKEN": "${NOTION_TOKEN}",
+        "NOTION_VERSION": "${NOTION_VERSION}"
+      }
+    }
+  }
+}
