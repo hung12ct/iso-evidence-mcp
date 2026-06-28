@@ -90,7 +90,9 @@ async def capture(
             viewport={"width": width, "height": height},
         )
         page = await context.new_page()
-        await page.goto(url, wait_until="networkidle")
+        # GitHub and other SPAs keep connections open, so "networkidle" can
+        # never fire — wait for the DOM to load, then settle for wait_ms.
+        await page.goto(url, wait_until="load")
         if selector:
             element = await page.wait_for_selector(selector)
             await element.screenshot(path=str(output_path))
